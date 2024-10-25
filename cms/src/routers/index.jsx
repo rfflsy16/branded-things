@@ -50,8 +50,8 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage base_url={base_url} />,
     loader: () => {
-      if (!localStorage.access_token) {
-        return redirect("/login");
+      if (localStorage.access_token) {
+        return redirect("/");
       }
 
       return null;
