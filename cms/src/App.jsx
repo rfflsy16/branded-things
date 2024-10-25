@@ -1,7 +1,10 @@
-import { useState } from "react";
+import createAppRouter from "./routers";
+import { RouterProvider } from "react-router-dom";
 
 function App() {
-  return <></>;
+  const router = createAppRouter();
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
