@@ -1,11 +1,10 @@
-import HomePage from "./assets/components/HomePage";
+import createAppRouter from "./routers";
+import { RouterProvider } from "react-router-dom";
 
-const App = () => {
-  return (
-    <div>
-      <HomePage />
-    </div>
-  );
-};
+function App() {
+  const router = createAppRouter();
+
+  return <RouterProvider router={router} />;
+}
 
 export default App;
