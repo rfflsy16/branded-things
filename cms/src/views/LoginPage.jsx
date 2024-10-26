@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Toastify from "toastify-js";
 
 export default function LoginPage({ base_url }) {
@@ -18,7 +18,7 @@ export default function LoginPage({ base_url }) {
       console.log("iniiii dataa login >>>>>>>>>>", data);
 
       localStorage.setItem("access_token", data.data.access_token);
-      Navigate("/");
+      navigation("/");
     } catch (error) {
       console.log(error);
 

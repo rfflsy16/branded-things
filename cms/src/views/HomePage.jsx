@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Navigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Toastify from "toastify-js";
-import Navbar from "../components/Navbar";
 
 export default function HomePage({ base_url }) {
   //   const [search, setSearch] = useState("");
@@ -41,10 +40,12 @@ export default function HomePage({ base_url }) {
     return formatter.format(price);
   }
 
+  const navigate = useNavigate();
+
   function handleEdit(e, id) {
     e.preventDefault();
 
-    Navigate(`/edit/${id}`);
+    navigate(`/edit/${id}`);
   }
 
   async function handleDelete(e, id) {
@@ -115,7 +116,7 @@ export default function HomePage({ base_url }) {
                           <div className="mask mask-squircle h-16 w-16">
                             <img src={el.imgUrl} alt={el.name} />
                           </div>
-                          <Link to={`/edit-image/${el.id}`}>
+                          <Link to={`/upload-image/${el.id}`}>
                             <button className="cursor-pointer text-xs text-blue-600 mt-1">
                               Edit image
                             </button>

@@ -19,12 +19,16 @@ export default function ProductForm({
 
   async function fetchCategories() {
     try {
-      const { data } = await axios.get(`${base_url}/categories`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
-      setCategories(data.categories);
+      const { data } = await axios.get(
+        `${base_url}/apis/branded-things/categories`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        }
+      );
+      console.log(">>>>>>>>>>>>>>>>>> iniii dataa categories", data.data);
+      setCategories(data.data);
     } catch (error) {
       console.log(error);
     }
@@ -47,12 +51,12 @@ export default function ProductForm({
 
   return (
     <>
-      <div className="flex flex-col items-center text-black">
+      <div className="flex flex-col items-center text-black bg-white">
         <h1 className="font-bold text-2xl pt-10">
           {formTitle} {name}
         </h1>
         <form
-          className="flex flex-col w-2/5 pt-10 gap-1"
+          className="flex flex-col w-2/5 pt-10 gap-1 bg-white"
           onSubmit={(event) =>
             handleSubmit(
               event,
@@ -69,7 +73,7 @@ export default function ProductForm({
           <input
             type="text"
             name="name"
-            className="h-8 mb-3"
+            className="h-8 mb-3 bg-white"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -77,7 +81,7 @@ export default function ProductForm({
           <label htmlFor="description">Description</label>
           <textarea
             name="description"
-            className=" mb-3 h-28 resize-none"
+            className=" mb-3 h-28 resize-none bg-white"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -86,20 +90,20 @@ export default function ProductForm({
           <input
             type="text"
             name="imgUrl"
-            className="h-8 mb-3"
+            className="h-8 mb-3 bg-white"
             value={imgUrl}
             onChange={(e) => setImgUrl(e.target.value)}
           />
 
-          <div className="flex flex-wrap justify-between mb-3 w-full">
-            <div className="flex flex-col">
+          <div className="flex flex-wrap justify-between mb-3 w-full bg-white">
+            <div className="flex flex-col bg-white">
               <label htmlFor="price">Price</label>
               <input
                 type="number"
                 name="price"
                 className="h-8 mb-3 w-auto"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => setPrice(Number(e.target.value))}
               />
             </div>
             <div className="flex flex-col">
@@ -109,7 +113,7 @@ export default function ProductForm({
                 name="stock"
                 className="h-8 mb-3 w-36"
                 value={stock}
-                onChange={(e) => setStock(e.target.value)}
+                onChange={(e) => setStock(Number(e.target.value))}
               />
             </div>
             <div className="flex flex-col">
@@ -119,7 +123,7 @@ export default function ProductForm({
                 id=""
                 className="w-auto h-8 text-xs"
                 value={categoryId}
-                onChange={(e) => setCategoryId(e.target.value)}
+                onChange={(e) => setCategoryId(Number(e.target.value))}
               >
                 {categories.map((category) => {
                   return (

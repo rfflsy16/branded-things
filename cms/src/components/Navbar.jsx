@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -42,7 +42,7 @@ export default function Navbar() {
             <li>
               <Link to="/add-product">Add Product</Link>
             </li>
-            {localStorage.acess_token && (
+            {localStorage.access_token && (
               <li>
                 <Link to="/add-user">Add User</Link>
               </li>
