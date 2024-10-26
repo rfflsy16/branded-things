@@ -10,7 +10,7 @@ export default function Categories({ base_url }) {
         `${base_url}/apis/branded-things/categories`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            Authorization: `Bearer ${localStorage.access_token}`,
           },
         }
       );
