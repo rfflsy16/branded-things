@@ -13,7 +13,7 @@ const router = createBrowserRouter([
   {
     element: <BaseLayout />,
     loader: () => {
-      if (!localStorage.getItem("access_token")) {
+      if (!localStorage.access_token) {
         return redirect("/login");
       }
 
