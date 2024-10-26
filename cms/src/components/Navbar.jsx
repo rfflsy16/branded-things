@@ -10,7 +10,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-gray-900 text-white">
+      <div className="navbar bg-gradient-to-r from-gray-800 via-gray-900 to-navy-900 text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -36,7 +36,7 @@ export default function Navbar() {
           </div>
           <Link
             to="/"
-            className="btn btn-ghost normal-case text-2xl font-bold text-white hover:text-indigo-300"
+            className="btn btn-ghost normal-case text-2xl font-bold text-white hover:text-blue-400"
           >
             Content Management System
           </Link>
@@ -44,18 +44,18 @@ export default function Navbar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link to="/categories" className="hover:text-indigo-300">
+              <Link to="/categories" className="hover:text-blue-400">
                 Categories
               </Link>
             </li>
             <li>
-              <Link to="/add-product" className="hover:text-indigo-300">
+              <Link to="/add-product" className="hover:text-blue-400">
                 Add Product
               </Link>
             </li>
             {localStorage.access_token && (
               <li>
-                <Link to="/add-user" className="hover:text-indigo-300">
+                <Link to="/add-user" className="hover:text-blue-400">
                   Add User
                 </Link>
               </li>
@@ -64,7 +64,7 @@ export default function Navbar() {
         </div>
         <div className="navbar-end">
           <button
-            className="btn btn-outline btn-error hover:bg-red-600"
+            className="btn btn-outline btn-error hover:bg-red-600 hover:text-white transition-all duration-300"
             onClick={logout}
           >
             Logout

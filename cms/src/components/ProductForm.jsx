@@ -48,8 +48,8 @@ export default function ProductForm({
   }, [product]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-brown-900 via-brown-700 to-brown-500">
-      <div className="w-full max-w-xl bg-white text-black shadow-lg p-8 rounded-3xl transform hover:scale-105 transition duration-300 ease-in-out">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-200 via-teal-200 to-purple-200">
+      <div className="w-full max-w-2xl bg-white text-black shadow-lg p-8 rounded-xl transform hover:scale-105 transition duration-300 ease-in-out">
         <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
           {formTitle}
         </h1>

@@ -100,36 +100,36 @@ export default function UploadImage({ base_url }) {
   }, [id]);
 
   return (
-    <>
-      <div className="flex flex-col justify-center items-center pt-20 gap-10">
-        <h1 className="text-2xl text-black">{`Edit Image for ${name}`}</h1>
-        <img src={imgUrl} alt="image" className="w-56" />
-        <form action="" method="POST" className="flex flex-col gap-10">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-blue-200 via-teal-200 to-purple-200">
+      <div className="bg-white rounded-xl shadow-xl p-10 w-full max-w-xl">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">{`Edit Image for ${name}`}</h1>
+        <img
+          src={imgUrl}
+          alt="image"
+          className="w-56 mx-auto mb-6 rounded-lg shadow-md"
+        />
+        <form action="" method="POST" className="space-y-6">
           <input
             type="file"
             accept="image/*"
             name="file"
             onChange={(event) => handleImageSelect(event)}
+            className="file-input file-input-bordered w-full bg-gray-100"
           />
-
           <button
             onClick={(event) => handleSubmit(event)}
-            className="btn btn-primary"
+            className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600 transition-all duration-300 shadow-md transform hover:scale-105"
           >
             Save Image
           </button>
         </form>
-        {uploading ? (
-          <>
-            {/* <div className="flex gap-1 justify-center items-center w-full">
-              <img src={Uploading} className="h-10" />
-              <p className="text-black">uploading...</p>
-            </div> */}
-          </>
-        ) : (
-          <></>
+        {uploading && (
+          <div className="flex gap-2 items-center justify-center mt-4">
+            <div className="spinner-border animate-spin inline-block w-6 h-6 border-4 rounded-full border-t-blue-600"></div>
+            <p className="text-gray-600">Uploading...</p>
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

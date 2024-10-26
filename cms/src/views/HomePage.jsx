@@ -74,16 +74,18 @@ export default function HomePage({ base_url }) {
   return (
     <>
       {loading ? (
-        <div className="min-h-screen flex flex-col items-center mt-32">
-          <img src={loading} className="size-16" alt="Loading..." />
-          <p className="text-lg font-semibold text-gray-700">
-            Fetching data...
-          </p>
+        <div className="min-h-screen min-w-screen flex flex-col items-center mt-24">
+          <img
+            src="https://media.giphy.com/media/3oriOiizS4Pmofj46A/giphy.gif?cid=ecf05e475hknyllb9cmscwzftlrmhw49rqdafxrzaq9wbagl&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+            className="size-16"
+            alt="Loading..."
+          />
+          <p className="text-lg font-semibold text-gray-700">Loading ...</p>
         </div>
       ) : (
-        <div className="overflow-x-auto p-10 bg-gradient-to-r from-gray-50 to-gray-200 rounded-lg shadow-lg">
+        <div className="overflow-x-auto p-10 bg-gradient-to-r from-blue-200 via-teal-200 to-purple-200 rounded-lg">
           <table className="table text-black">
-            <thead className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+            <thead className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg">
               <tr>
                 <th></th>
                 <th>Product Name</th>
@@ -97,22 +99,21 @@ export default function HomePage({ base_url }) {
               {product
                 .slice()
                 .reverse()
-                .map((el) => {
+                .map((el, index) => {
                   return (
                     <tr
                       key={el.id}
-                      className="hover:shadow-lg hover:bg-gradient-to-r from-gray-100 to-gray-200 transition-all duration-300 rounded-lg"
+                      className={`${
+                        index % 2 === 0
+                          ? "bg-blue-50 hover:bg-blue-100"
+                          : "bg-teal-50 hover:bg-teal-100"
+                      } transition-all duration-300 rounded-lg`}
                     >
                       <td>
                         <div className="avatar flex flex-col items-center">
-                          <div className="mask mask-squircle h-16 w-16 shadow-md hover:shadow-xl transition-shadow duration-300">
+                          <div className="mask mask-squircle h-16 w-16">
                             <img src={el.imgUrl} alt={el.name} />
                           </div>
-                          <Link to={`/upload-image/${el.id}`}>
-                            <button className="cursor-pointer text-xs text-blue-600 mt-2 hover:underline">
-                              Edit Image
-                            </button>
-                          </Link>
                         </div>
                       </td>
                       <td>
@@ -140,17 +141,22 @@ export default function HomePage({ base_url }) {
                       <td>
                         <div className="flex gap-2">
                           <button
-                            className="btn btn-primary btn-sm hover:bg-blue-600 transition-all duration-300 shadow-md"
+                            className="btn btn-primary btn-sm bg-blue-500 hover:bg-blue-600 transition-all duration-300 shadow-lg transform hover:translate-y-1 hover:scale-105"
                             onClick={(event) => handleEdit(event, el.id)}
                           >
                             Edit
                           </button>
                           <button
-                            className="btn btn-error btn-sm hover:bg-red-600 transition-all duration-300 shadow-md"
+                            className="btn btn-error btn-sm bg-red-500 hover:bg-red-600 transition-all duration-300 shadow-lg transform hover:translate-y-1 hover:scale-105"
                             onClick={(event) => handleDelete(event, el.id)}
                           >
                             Delete
                           </button>
+                          <Link to={`/upload-image/${el.id}`}>
+                            <button className="btn btn-info btn-sm bg-yellow-500 hover:bg-yellow-600 transition-all duration-300 shadow-lg transform hover:translate-y-1 hover:scale-105">
+                              Edit Image
+                            </button>
+                          </Link>
                         </div>
                       </td>
                     </tr>
