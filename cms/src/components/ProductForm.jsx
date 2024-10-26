@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function ProductForm({
@@ -27,7 +26,6 @@ export default function ProductForm({
           },
         }
       );
-      console.log(">>>>>>>>>>>>>>>>>> iniii dataa categories", data.data);
       setCategories(data.data);
     } catch (error) {
       console.log(error);
@@ -50,13 +48,13 @@ export default function ProductForm({
   }, [product]);
 
   return (
-    <>
-      <div className="flex flex-col items-center text-black bg-white">
-        <h1 className="font-bold text-2xl pt-10">
-          {formTitle} {name}
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-brown-900 via-brown-700 to-brown-500">
+      <div className="w-full max-w-xl bg-white text-black shadow-lg p-8 rounded-3xl transform hover:scale-105 transition duration-300 ease-in-out">
+        <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
+          {formTitle}
         </h1>
         <form
-          className="flex flex-col w-2/5 pt-10 gap-1 bg-white"
+          className="space-y-6"
           onSubmit={(event) =>
             handleSubmit(
               event,
@@ -69,78 +67,97 @@ export default function ProductForm({
             )
           }
         >
-          <label htmlFor="name">Product Name</label>
-          <input
-            type="text"
-            name="name"
-            className="h-8 mb-3 bg-white"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <div className="form-control">
+            <label htmlFor="name" className="label text-black">
+              Product Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              className="input input-bordered w-full bg-gray-100 text-black shadow-md rounded-lg"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-          <label htmlFor="description">Description</label>
-          <textarea
-            name="description"
-            className=" mb-3 h-28 resize-none bg-white"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          <div className="form-control">
+            <label htmlFor="description" className="label text-black">
+              Description
+            </label>
+            <textarea
+              name="description"
+              className="textarea textarea-bordered w-full bg-gray-100 text-black shadow-md rounded-lg"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+          </div>
 
-          <label htmlFor="imgUrl">Image URL</label>
-          <input
-            type="text"
-            name="imgUrl"
-            className="h-8 mb-3 bg-white"
-            value={imgUrl}
-            onChange={(e) => setImgUrl(e.target.value)}
-          />
+          <div className="form-control">
+            <label htmlFor="imgUrl" className="label text-black">
+              Image URL
+            </label>
+            <input
+              type="text"
+              name="imgUrl"
+              className="input input-bordered w-full bg-gray-100 text-black shadow-md rounded-lg"
+              value={imgUrl}
+              onChange={(e) => setImgUrl(e.target.value)}
+            />
+          </div>
 
-          <div className="flex flex-wrap justify-between mb-3 w-full bg-white">
-            <div className="flex flex-col bg-white">
-              <label htmlFor="price">Price</label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="form-control">
+              <label htmlFor="price" className="label text-black">
+                Price
+              </label>
               <input
                 type="number"
                 name="price"
-                className="h-8 mb-3 w-auto"
+                className="input input-bordered w-full bg-gray-100 text-black shadow-md rounded-lg"
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
               />
             </div>
-            <div className="flex flex-col">
-              <label htmlFor="stock">Stock</label>
+            <div className="form-control">
+              <label htmlFor="stock" className="label text-black">
+                Stock
+              </label>
               <input
                 type="number"
                 name="stock"
-                className="h-8 mb-3 w-36"
+                className="input input-bordered w-full bg-gray-100 text-black shadow-md rounded-lg"
                 value={stock}
                 onChange={(e) => setStock(Number(e.target.value))}
               />
             </div>
-            <div className="flex flex-col">
-              <label htmlFor="category">Category</label>
-              <select
-                name="category"
-                id=""
-                className="w-auto h-8 text-xs"
-                value={categoryId}
-                onChange={(e) => setCategoryId(Number(e.target.value))}
-              >
-                {categories.map((category) => {
-                  return (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <div className="form-control">
+            <label htmlFor="categoryId" className="label text-black">
+              Category
+            </label>
+            <select
+              name="categoryId"
+              className="select select-bordered w-full bg-gray-100 text-black shadow-md rounded-lg"
+              value={categoryId}
+              onChange={(e) => setCategoryId(Number(e.target.value))}
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            className="btn btn-primary w-full mt-4 hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-2xl rounded-lg"
+          >
             {buttonText}
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }

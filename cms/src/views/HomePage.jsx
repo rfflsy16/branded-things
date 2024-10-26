@@ -4,14 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Toastify from "toastify-js";
 
 export default function HomePage({ base_url }) {
-  //   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState([]);
 
   async function fetchProduct() {
     try {
       setLoading(true);
-
       const { data } = await axios.get(
         `${base_url}/apis/branded-things/products`,
         {
@@ -20,9 +18,7 @@ export default function HomePage({ base_url }) {
           },
         }
       );
-      console.log(base_url);
       setProduct(data.data);
-      console.log(data.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -44,7 +40,6 @@ export default function HomePage({ base_url }) {
 
   function handleEdit(e, id) {
     e.preventDefault();
-
     navigate(`/edit/${id}`);
   }
 
@@ -60,20 +55,19 @@ export default function HomePage({ base_url }) {
         duration: 3000,
         newWindow: true,
         close: true,
-        gravity: "bottom", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
         style: {
-          background: "bg-red-800",
+          background: "#ff4d4f",
         },
-        onClick: function () {}, // Callback after click
       }).showToast();
     } catch (error) {
       console.log(error);
     }
   }
+
   useEffect(() => {
-    console.log("inii fetch product");
     fetchProduct();
   }, []);
 
@@ -83,25 +77,23 @@ export default function HomePage({ base_url }) {
         <div className="min-h-screen flex flex-col items-center mt-32">
           <img src={loading} className="size-16" alt="Loading..." />
           <p className="text-lg font-semibold text-gray-700">
-            fetching data...
+            Fetching data...
           </p>
         </div>
       ) : (
-        <div className="overflow-x-auto p-10 bg-white">
+        <div className="overflow-x-auto p-10 bg-gradient-to-r from-gray-50 to-gray-200 rounded-lg shadow-lg">
           <table className="table text-black">
-            {/* head */}
-            <thead className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
+            <thead className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
               <tr>
                 <th></th>
                 <th>Product Name</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Stock</th>
-                <th></th>
+                <th>Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-gradient-to-r from-blue-50 to-indigo-50">
-              {/* rows */}
+            <tbody className="bg-white">
               {product
                 .slice()
                 .reverse()
@@ -109,16 +101,16 @@ export default function HomePage({ base_url }) {
                   return (
                     <tr
                       key={el.id}
-                      className="hover:bg-gradient-to-r from-blue-100 to-indigo-100"
+                      className="hover:shadow-lg hover:bg-gradient-to-r from-gray-100 to-gray-200 transition-all duration-300 rounded-lg"
                     >
                       <td>
                         <div className="avatar flex flex-col items-center">
-                          <div className="mask mask-squircle h-16 w-16">
+                          <div className="mask mask-squircle h-16 w-16 shadow-md hover:shadow-xl transition-shadow duration-300">
                             <img src={el.imgUrl} alt={el.name} />
                           </div>
                           <Link to={`/upload-image/${el.id}`}>
-                            <button className="cursor-pointer text-xs text-blue-600 mt-1">
-                              Edit image
+                            <button className="cursor-pointer text-xs text-blue-600 mt-2 hover:underline">
+                              Edit Image
                             </button>
                           </Link>
                         </div>
@@ -133,28 +125,28 @@ export default function HomePage({ base_url }) {
                         </div>
                       </td>
                       <td>
-                        <p className="max-w-96 text-gray-700">
+                        <p className="max-w-96 text-gray-600">
                           {el.description}
                         </p>
                       </td>
                       <td>
-                        <p className="text-gray-700">
+                        <p className="text-gray-800">
                           {priceBeingRupiah(el.price)}
                         </p>
                       </td>
                       <td>
-                        <p className="text-gray-700">{el.stock}</p>
+                        <p className="text-gray-800">{el.stock}</p>
                       </td>
                       <td>
                         <div className="flex gap-2">
                           <button
-                            className="btn btn-primary btn-sm hover:btn-secondary"
+                            className="btn btn-primary btn-sm hover:bg-blue-600 transition-all duration-300 shadow-md"
                             onClick={(event) => handleEdit(event, el.id)}
                           >
                             Edit
                           </button>
                           <button
-                            className="btn btn-error btn-sm hover:bg-red-600"
+                            className="btn btn-error btn-sm hover:bg-red-600 transition-all duration-300 shadow-md"
                             onClick={(event) => handleDelete(event, el.id)}
                           >
                             Delete

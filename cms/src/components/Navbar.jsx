@@ -10,13 +10,17 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-gray-900 text-white">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost ">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost text-white"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -30,27 +34,39 @@ export default function Navbar() {
               </svg>
             </div>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl">
+          <Link
+            to="/"
+            className="btn btn-ghost normal-case text-2xl font-bold text-white hover:text-indigo-300"
+          >
             Content Management System
           </Link>
         </div>
-        <div className="navbar-center lg:flex">
+        <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link to="/categories">Categories</Link>
+              <Link to="/categories" className="hover:text-indigo-300">
+                Categories
+              </Link>
             </li>
             <li>
-              <Link to="/add-product">Add Product</Link>
+              <Link to="/add-product" className="hover:text-indigo-300">
+                Add Product
+              </Link>
             </li>
             {localStorage.access_token && (
               <li>
-                <Link to="/add-user">Add User</Link>
+                <Link to="/add-user" className="hover:text-indigo-300">
+                  Add User
+                </Link>
               </li>
             )}
           </ul>
         </div>
         <div className="navbar-end">
-          <button className="btn btn-error" onClick={logout}>
+          <button
+            className="btn btn-outline btn-error hover:bg-red-600"
+            onClick={logout}
+          >
             Logout
           </button>
         </div>
