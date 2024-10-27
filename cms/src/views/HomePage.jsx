@@ -48,7 +48,15 @@ export default function HomePage({ base_url }) {
     try {
       const { data } = await axios.delete(
         `${base_url}/apis/branded-things/products/${id}`,
-        { Authorization: `Bearer ${localStorage.access_token}` }
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        }
+      );
+      console.log(
+        ">>>>>>>>>>>>> INII ACCESS TOKENN",
+        localStorage.access_token
       );
       Toastify({
         text: data.message,
@@ -63,7 +71,20 @@ export default function HomePage({ base_url }) {
         },
       }).showToast();
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
+      Toastify({
+        text: error.response.data.error,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#ff4d4f",
+        },
+      }).showToast();
+      throw error;
     }
   }
 
